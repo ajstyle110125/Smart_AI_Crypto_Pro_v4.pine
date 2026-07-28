@@ -792,3 +792,38 @@ if barstate.islast and showDashboard
 
     table.cell(dashboard, 0, 5, "Signal")
     table.cell(dashboard, 1, 5, buyEntry ? "BUY" : sellEntry ? "SELL" : "WAIT")
+
+//====================================================
+// MODULE 15 - MULTI TIMEFRAME ENGINE
+//====================================================
+
+//-------------------------
+// MTF INPUTS
+//-------------------------
+
+higherTF = input.timeframe("60", "Higher Timeframe", group="Multi Timeframe")
+
+//-------------------------
+// HTF EMA
+//-------------------------
+
+htfEMA50 = request.security(syminfo.tickerid, higherTF, ta.ema(close, 50))
+htfEMA200 = request.security(syminfo.tickerid, higherTF, ta.ema(close, 200))
+
+//-------------------------
+// HTF TREND
+//-------------------------
+
+htfBullTrend = htfEMA50 > htfEMA200
+htfBearTrend = htfEMA50 < htfEMA200
+
+//-------------------------
+// FINAL MTF FILTER
+//-------------------------
+
+buyEntry := buyEntry and htfBullTrend
+sellEntry := sellEntry and htfBearTrend
+
+// Hidden plots
+plot(htfEMA50, display=display.none)
+plot(htfEMA200, display=display.none)
