@@ -129,3 +129,83 @@ else if strongBearTrend
 
 // Hidden Values
 plot(trendScore, title="Trend Score", display=display.none)
+//====================================================
+// MODULE 03 - MOMENTUM ENGINE
+//====================================================
+
+//-------------------------
+// RSI
+//-------------------------
+
+rsiLength = input.int(14, "RSI Length", group=grpAI)
+rsiValue = ta.rsi(close, rsiLength)
+
+bullRSI = rsiValue > 55
+bearRSI = rsiValue < 45
+
+//-------------------------
+// MACD
+//-------------------------
+
+macdFast = input.int(12, "MACD Fast", group=grpAI)
+macdSlow = input.int(26, "MACD Slow", group=grpAI)
+macdSignal = input.int(9, "MACD Signal", group=grpAI)
+
+macdLine = ta.ema(close, macdFast) - ta.ema(close, macdSlow)
+signalLine = ta.ema(macdLine, macdSignal)
+histogram = macdLine - signalLine
+
+bullMACD = macdLine > signalLine
+bearMACD = macdLine < signalLine
+
+//-------------------------
+// Volume
+//-------------------------
+
+volMA = ta.sma(volume, 20)
+
+highVolume = volume > volMA
+
+//-------------------------
+// MOMENTUM SCORE
+//-------------------------
+
+int bullMomentumScore = 0
+int bearMomentumScore = 0
+
+if bullRSI
+    bullMomentumScore += 25
+
+if bullMACD
+    bullMomentumScore += 25
+
+if highVolume
+    bullMomentumScore += 25
+
+if strongBullTrend
+    bullMomentumScore += 25
+
+if bearRSI
+    bearMomentumScore += 25
+
+if bearMACD
+    bearMomentumScore += 25
+
+if highVolume
+    bearMomentumScore += 25
+
+if strongBearTrend
+    bearMomentumScore += 25
+
+//-------------------------
+// MOMENTUM FILTER
+//-------------------------
+
+bullMomentum = bullMomentumScore >= minimumAIScore
+bearMomentum = bearMomentumScore >= minimumAIScore
+
+// Hidden plots
+plot(rsiValue, title="RSI", display=display.none)
+plot(macdLine, title="MACD", display=display.none)
+plot(signalLine, title="Signal", display=display.none)
+plot(histogram, title="Histogram", display=display.none)
