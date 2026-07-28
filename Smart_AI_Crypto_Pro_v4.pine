@@ -685,7 +685,7 @@ if positionOpen
 
     if positionSide == -1 and high >= stopLoss
         positionOpen := false
-        positionSide := 
+        positionSide := 0
 //====================================================
 // MODULE 10 - TRADE ENGINE V2 (PART 2)
 //====================================================
