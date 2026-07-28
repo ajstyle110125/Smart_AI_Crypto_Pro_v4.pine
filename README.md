@@ -1,12 +1,20 @@
-//@version=6
-indicator(
-    title="Smart AI Crypto Pro v4 Ultimate",
-    shorttitle="SAICP v4",
-    overlay=true,
-    max_labels_count=500,
-    max_lines_count=500,
-    max_boxes_count=500)
-//====================================================
-// MODULE 01 - CORE ENGINE
-// VERSION : v4.0-alpha
-//====================================================
+# Smart AI Crypto Pro v4 Ultimate
+
+Professional TradingView Pine Script v6 Indicator
+
+## Current Version
+v4.0-alpha
+
+## Status
+🚧 Under Development
+
+## Features (Planned)
+- AI Engine
+- Smart Money Concepts
+- Trend Engine
+- Entry Engine
+- Trade Manager
+- Dashboard
+- Alerts
+
+Developed by Ajay Kumar Sharma
