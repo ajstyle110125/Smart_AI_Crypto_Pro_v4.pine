@@ -354,37 +354,27 @@ useSMCFilter = input.bool(true, "Use Smart Money Filter", group="Entry Engine")
 // FILTER RESULTS
 //-------------------------
 
-trendBuyOK = (not useTrendFilter) or strongBullTrend
-trendSellOK = (not useTrendFilter) or strongBearTrend
+trendBuyOK = not useTrendFilter or strongBullTrend
+trendSellOK = not useTrendFilter or strongBearTrend
 
-momentumBuyOK = (not useMomentumFilter) or bullMomentum
-momentumSellOK = (not useMomentumFilter) or bearMomentum
+momentumBuyOK = not useMomentumFilter or bullMomentum
+momentumSellOK = not useMomentumFilter or bearMomentum
 
-smcBuyOK = (not useSMCFilter) or bullSMC
-smcSellOK = (not useSMCFilter) or bearSMC
+smcBuyOK = not useSMCFilter or bullSMC
+smcSellOK = not useSMCFilter or bearSMC
 
 //-------------------------
 // FINAL ENTRY
 //-------------------------
 
-buyEntry =
-    buySignal and
-    trendBuyOK and
-    momentumBuyOK and
-    smcBuyOK
-
-sellEntry =
-    sellSignal and
-    trendSellOK and
-    momentumSellOK and
-    smcSellOK
+bool buyEntry = buySignal and trendBuyOK and momentumBuyOK and smcBuyOK
+bool sellEntry = sellSignal and trendSellOK and momentumSellOK and smcSellOK
 
 //-------------------------
 // ENTRY LABELS
 //-------------------------
 
-plotshape(
-     buyEntry,
+plotshape(series=buyEntry,
      title="BUY",
      style=shape.labelup,
      location=location.belowbar,
@@ -393,8 +383,7 @@ plotshape(
      textcolor=color.white,
      size=size.small)
 
-plotshape(
-     sellEntry,
+plotshape(series=sellEntry,
      title="SELL",
      style=shape.labeldown,
      location=location.abovebar,
