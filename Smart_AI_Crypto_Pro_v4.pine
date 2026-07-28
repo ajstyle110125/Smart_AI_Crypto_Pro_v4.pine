@@ -827,3 +827,33 @@ sellEntry := sellEntry and htfBearTrend
 // Hidden plots
 plot(htfEMA50, display=display.none)
 plot(htfEMA200, display=display.none)
+
+//====================================================
+// MODULE 16 - SESSION FILTER ENGINE
+//====================================================
+
+//-------------------------
+// SESSION INPUTS
+//-------------------------
+
+useSessionFilter = input.bool(true, "Use Session Filter", group="Session")
+tradeSession = input.session("0900-1700", "Trading Session", group="Session")
+
+//-------------------------
+// SESSION CHECK
+//-------------------------
+
+inSession = not na(time(timeframe.period, tradeSession))
+
+//-------------------------
+// APPLY SESSION FILTER
+//-------------------------
+
+buyEntry := buyEntry and (not useSessionFilter or inSession)
+sellEntry := sellEntry and (not useSessionFilter or inSession)
+
+//-------------------------
+// SESSION STATUS
+//-------------------------
+
+sessionStatus = inSession ? "OPEN" : "CLOSED"
