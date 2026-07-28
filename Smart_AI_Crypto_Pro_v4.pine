@@ -511,3 +511,83 @@ if sellEntry
     tp6 := entryPrice - atr * tpATRMultiplier * 6
     tp7 := entryPrice - atr * tpATRMultiplier * 7
     tp8 := entryPrice - atr * tpATRMultiplier * 8
+//====================================================
+// MODULE 09 - DRAWING ENGINE (PART 1)
+//====================================================
+
+//-------------------------
+// LINE VARIABLES
+//-------------------------
+
+var line entryLine = na
+var line slLine = na
+
+var line tp1Line = na
+var line tp2Line = na
+var line tp3Line = na
+var line tp4Line = na
+var line tp5Line = na
+var line tp6Line = na
+var line tp7Line = na
+var line tp8Line = na
+
+//-------------------------
+// CREATE NEW DRAWINGS
+//-------------------------
+
+if buyEntry or sellEntry
+
+    // Delete old lines
+    line.delete(entryLine)
+    line.delete(slLine)
+
+    line.delete(tp1Line)
+    line.delete(tp2Line)
+    line.delete(tp3Line)
+    line.delete(tp4Line)
+    line.delete(tp5Line)
+    line.delete(tp6Line)
+    line.delete(tp7Line)
+    line.delete(tp8Line)
+
+    // Entry
+    entryLine := line.new(
+         bar_index,
+         entryPrice,
+         bar_index + 20,
+         entryPrice,
+         color=color.white,
+         width=2)
+
+    // Stop Loss
+    slLine := line.new(
+         bar_index,
+         stopLoss,
+         bar_index + 20,
+         stopLoss,
+         color=color.red,
+         width=2)
+
+    // TP1
+    tp1Line := line.new(bar_index, tp1, bar_index + 20, tp1, color=color.lime)
+
+    // TP2
+    tp2Line := line.new(bar_index, tp2, bar_index + 20, tp2, color=color.lime)
+
+    // TP3
+    tp3Line := line.new(bar_index, tp3, bar_index + 20, tp3, color=color.lime)
+
+    // TP4
+    tp4Line := line.new(bar_index, tp4, bar_index + 20, tp4, color=color.lime)
+
+    // TP5
+    tp5Line := line.new(bar_index, tp5, bar_index + 20, tp5, color=color.lime)
+
+    // TP6
+    tp6Line := line.new(bar_index, tp6, bar_index + 20, tp6, color=color.lime)
+
+    // TP7
+    tp7Line := line.new(bar_index, tp7, bar_index + 20, tp7, color=color.lime)
+
+    // TP8
+    tp8Line := line.new(bar_index, tp8, bar_index + 20, tp8, color=color.lime)
