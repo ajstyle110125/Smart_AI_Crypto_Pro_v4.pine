@@ -685,5 +685,53 @@ if positionOpen
 
     if positionSide == -1 and high >= stopLoss
         positionOpen := false
-        positionSide := 0
+        positionSide := 
+//====================================================
+// MODULE 10 - TRADE ENGINE V2 (PART 2)
+//====================================================
+
+//-------------------------
+// TP CALCULATION
+//-------------------------
+
+if positionOpen and positionSide == 1
+
+    tp1 := entryPrice + tradeRisk * 1.0
+    tp2 := entryPrice + tradeRisk * 2.0
+    tp3 := entryPrice + tradeRisk * 3.0
+    tp4 := entryPrice + tradeRisk * 4.0
+    tp5 := entryPrice + tradeRisk * 5.0
+    tp6 := entryPrice + tradeRisk * 6.0
+    tp7 := entryPrice + tradeRisk * 7.0
+    tp8 := entryPrice + tradeRisk * 8.0
+
+if positionOpen and positionSide == -1
+
+    tp1 := entryPrice - tradeRisk * 1.0
+    tp2 := entryPrice - tradeRisk * 2.0
+    tp3 := entryPrice - tradeRisk * 3.0
+    tp4 := entryPrice - tradeRisk * 4.0
+    tp5 := entryPrice - tradeRisk * 5.0
+    tp6 := entryPrice - tradeRisk * 6.0
+    tp7 := entryPrice - tradeRisk * 7.0
+    tp8 := entryPrice - tradeRisk * 8.0
+
+//-------------------------
+// TRADE CLOSE ON TP8
+//-------------------------
+
+if positionOpen and positionSide == 1 and high >= tp8
+    positionOpen := false
+    positionSide := 0
+
+if positionOpen and positionSide == -1 and low <= tp8
+    positionOpen := false
+    positionSide := 0
+
+//-------------------------
+// TRADE STATUS
+//-------------------------
+
+tradeRunning := positionOpen
+tradeSide := positionSide
 
