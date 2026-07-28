@@ -630,3 +630,60 @@ if tradeRunning
 
     if not na(tp8Line)
         line.set_x2(tp8Line, bar_index + 20)
+
+//====================================================
+// MODULE 10 - TRADE ENGINE V2 (PART 1)
+//====================================================
+
+//-------------------------
+// TRADE STATE
+//-------------------------
+
+var bool positionOpen = false
+var int positionSide = 0
+
+var float tradeRisk = na
+var float tradeReward = na
+
+//-------------------------
+// BUY ENTRY
+//-------------------------
+
+if buyEntry and not positionOpen
+
+    positionOpen := true
+    positionSide := 1
+
+    entryPrice := close
+    stopLoss := close - atr * atrMultiplier
+
+    tradeRisk := math.abs(entryPrice - stopLoss)
+
+//-------------------------
+// SELL ENTRY
+//-------------------------
+
+if sellEntry and not positionOpen
+
+    positionOpen := true
+    positionSide := -1
+
+    entryPrice := close
+    stopLoss := close + atr * atrMultiplier
+
+    tradeRisk := math.abs(entryPrice - stopLoss)
+
+//-------------------------
+// RESET POSITION
+//-------------------------
+
+if positionOpen
+
+    if positionSide == 1 and low <= stopLoss
+        positionOpen := false
+        positionSide := 0
+
+    if positionSide == -1 and high >= stopLoss
+        positionOpen := false
+        positionSide := 0
+
