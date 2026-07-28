@@ -378,3 +378,85 @@ bool sellEntry = sellSignal and trendSellOK and momentumSellOK and smcSellOK
 plotshape(series=buyEntry, title="BUY", style=shape.labelup, location=location.belowbar, color=color.lime, text="BUY", textcolor=color.white, size=size.small)
 
 plotshape(series=sellEntry, title="SELL", style=shape.labeldown, location=location.abovebar, color=color.orange, text="SELL", textcolor=color.white, size=size.small)
+
+//====================================================
+// MODULE 07 - TRADE MANAGER
+//====================================================
+
+//-------------------------
+// TRADE VARIABLES
+//-------------------------
+
+var float tradeEntry = na
+var float tradeSL = na
+
+var float tradeTP1 = na
+var float tradeTP2 = na
+var float tradeTP3 = na
+var float tradeTP4 = na
+var float tradeTP5 = na
+var float tradeTP6 = na
+var float tradeTP7 = na
+var float tradeTP8 = na
+
+//-------------------------
+// BUY TRADE
+//-------------------------
+
+if buyEntry
+
+    tradeRunning := true
+    tradeSide := 1
+
+    tradeEntry := close
+    tradeSL := close - atr * atrMultiplier
+
+    risk = tradeEntry - tradeSL
+
+    tradeTP1 := tradeEntry + risk * 1
+    tradeTP2 := tradeEntry + risk * 2
+    tradeTP3 := tradeEntry + risk * 3
+    tradeTP4 := tradeEntry + risk * 4
+    tradeTP5 := tradeEntry + risk * 5
+    tradeTP6 := tradeEntry + risk * 6
+    tradeTP7 := tradeEntry + risk * 7
+    tradeTP8 := tradeEntry + risk * 8
+
+//-------------------------
+// SELL TRADE
+//-------------------------
+
+if sellEntry
+
+    tradeRunning := true
+    tradeSide := -1
+
+    tradeEntry := close
+    tradeSL := close + atr * atrMultiplier
+
+    risk = tradeSL - tradeEntry
+
+    tradeTP1 := tradeEntry - risk * 1
+    tradeTP2 := tradeEntry - risk * 2
+    tradeTP3 := tradeEntry - risk * 3
+    tradeTP4 := tradeEntry - risk * 4
+    tradeTP5 := tradeEntry - risk * 5
+    tradeTP6 := tradeEntry - risk * 6
+    tradeTP7 := tradeEntry - risk * 7
+    tradeTP8 := tradeEntry - risk * 8
+
+//-------------------------
+// COPY VALUES
+//-------------------------
+
+entryPrice := tradeEntry
+stopLoss := tradeSL
+
+tp1 := tradeTP1
+tp2 := tradeTP2
+tp3 := tradeTP3
+tp4 := tradeTP4
+tp5 := tradeTP5
+tp6 := tradeTP6
+tp7 := tradeTP7
+tp8 := tradeTP8
