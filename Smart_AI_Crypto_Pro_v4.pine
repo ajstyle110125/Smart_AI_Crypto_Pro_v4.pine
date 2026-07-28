@@ -591,3 +591,42 @@ if buyEntry or sellEntry
 
     // TP8
     tp8Line := line.new(bar_index, tp8, bar_index + 20, tp8, color=color.lime)
+//====================================================
+// MODULE 09 - DRAWING ENGINE (PART 2)
+//====================================================
+
+//-------------------------
+// EXTEND DRAWINGS
+//-------------------------
+
+if tradeRunning
+
+    if not na(entryLine)
+        line.set_x2(entryLine, bar_index + 20)
+
+    if not na(slLine)
+        line.set_x2(slLine, bar_index + 20)
+
+    if not na(tp1Line)
+        line.set_x2(tp1Line, bar_index + 20)
+
+    if not na(tp2Line)
+        line.set_x2(tp2Line, bar_index + 20)
+
+    if not na(tp3Line)
+        line.set_x2(tp3Line, bar_index + 20)
+
+    if not na(tp4Line)
+        line.set_x2(tp4Line, bar_index + 20)
+
+    if not na(tp5Line)
+        line.set_x2(tp5Line, bar_index + 20)
+
+    if not na(tp6Line)
+        line.set_x2(tp6Line, bar_index + 20)
+
+    if not na(tp7Line)
+        line.set_x2(tp7Line, bar_index + 20)
+
+    if not na(tp8Line)
+        line.set_x2(tp8Line, bar_index + 20)
