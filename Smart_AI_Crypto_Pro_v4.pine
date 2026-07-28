@@ -378,6 +378,3 @@ bool sellEntry = sellSignal and trendSellOK and momentumSellOK and smcSellOK
 plotshape(series=buyEntry, title="BUY", style=shape.labelup, location=location.belowbar, color=color.lime, text="BUY", textcolor=color.white, size=size.small)
 
 plotshape(series=sellEntry, title="SELL", style=shape.labeldown, location=location.abovebar, color=color.orange, text="SELL", textcolor=color.white, size=size.small)
-     text="SELL",
-     textcolor=color.white,
-     size=size.small)
