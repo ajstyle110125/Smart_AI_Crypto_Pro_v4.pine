@@ -209,3 +209,67 @@ plot(rsiValue, title="RSI", display=display.none)
 plot(macdLine, title="MACD", display=display.none)
 plot(signalLine, title="Signal", display=display.none)
 plot(histogram, title="Histogram", display=display.none)
+//====================================================
+// MODULE 04 - AI SIGNAL ENGINE
+//====================================================
+
+//-------------------------
+// AI SCORE
+//-------------------------
+
+int aiBuyScore = 0
+int aiSellScore = 0
+
+// Trend
+if strongBullTrend
+    aiBuyScore += 30
+
+if strongBearTrend
+    aiSellScore += 30
+
+// Momentum
+if bullMomentum
+    aiBuyScore += 30
+
+if bearMomentum
+    aiSellScore += 30
+
+// EMA Cross
+if bullCross
+    aiBuyScore += 20
+
+if bearCross
+    aiSellScore += 20
+
+// Candle Confirmation
+bullCandle = close > open
+bearCandle = close < open
+
+if bullCandle
+    aiBuyScore += 20
+
+if bearCandle
+    aiSellScore += 20
+
+//-------------------------
+// FINAL AI SIGNAL
+//-------------------------
+
+buySignal = aiBuyScore >= minimumAIScore
+sellSignal = aiSellScore >= minimumAIScore
+
+//-------------------------
+// AI RATING
+//-------------------------
+
+string aiRating = "NEUTRAL"
+
+if buySignal
+    aiRating := "BUY"
+
+if sellSignal
+    aiRating := "SELL"
+
+// Hidden plots
+plot(aiBuyScore, title="AI Buy Score", display=display.none)
+plot(aiSellScore, title="AI Sell Score", display=display.none)
