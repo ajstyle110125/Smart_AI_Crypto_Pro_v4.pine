@@ -905,3 +905,38 @@ plotshape(
      text="SELL",
      textcolor=color.white,
      size=size.normal)
+
+//====================================================
+// MODULE 18 - DEBUG & SIGNAL ANALYZER
+//====================================================
+
+//-------------------------
+// DEBUG MODE
+//-------------------------
+
+showDebug = input.bool(true, "Show Debug Panel", group="Debug")
+
+var table debugTable = table.new(position.bottom_right, 2, 7, border_width=1)
+
+if barstate.islast and showDebug
+
+    table.cell(debugTable, 0, 0, "Trend")
+    table.cell(debugTable, 1, 0, trendBuyOK ? "PASS" : "FAIL")
+
+    table.cell(debugTable, 0, 1, "Momentum")
+    table.cell(debugTable, 1, 1, momentumBuyOK ? "PASS" : "FAIL")
+
+    table.cell(debugTable, 0, 2, "SMC")
+    table.cell(debugTable, 1, 2, smcBuyOK ? "PASS" : "FAIL")
+
+    table.cell(debugTable, 0, 3, "MTF")
+    table.cell(debugTable, 1, 3, htfBullTrend ? "PASS" : "FAIL")
+
+    table.cell(debugTable, 0, 4, "Session")
+    table.cell(debugTable, 1, 4, inSession ? "PASS" : "FAIL")
+
+    table.cell(debugTable, 0, 5, "BUY")
+    table.cell(debugTable, 1, 5, finalBuySignal ? "YES" : "NO")
+
+    table.cell(debugTable, 0, 6, "SELL")
+    table.cell(debugTable, 1, 6, finalSellSignal ? "YES" : "NO")
