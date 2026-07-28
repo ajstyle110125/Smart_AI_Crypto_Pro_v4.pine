@@ -735,3 +735,34 @@ if positionOpen and positionSide == -1 and low <= tp8
 tradeRunning := positionOpen
 tradeSide := positionSide
 
+//====================================================
+// MODULE 13 - ALERT ENGINE
+//====================================================
+
+//-------------------------
+// ALERT CONDITIONS
+//-------------------------
+
+alertcondition(
+    buyEntry,
+    title = "BUY Signal",
+    message = "Smart AI Crypto Pro v4 : BUY Signal")
+
+alertcondition(
+    sellEntry,
+    title = "SELL Signal",
+    message = "Smart AI Crypto Pro v4 : SELL Signal")
+
+//-------------------------
+// TREND ALERTS
+//-------------------------
+
+alertcondition(
+    bullCross,
+    title = "Bullish EMA Cross",
+    message = "Bullish EMA Cross Detected")
+
+alertcondition(
+    bearCross,
+    title = "Bearish EMA Cross",
+    message = "Bearish EMA Cross Detected")
