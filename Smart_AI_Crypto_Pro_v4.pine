@@ -93,3 +93,40 @@ var float tp5 = na
 var float tp6 = na
 var float tp7 = na
 var float tp8 = na
+//====================================================
+// MODULE 02 - TREND ENGINE
+//====================================================
+
+// Trend Detection
+bullTrend = emaFast > emaSlow and close > emaTrend
+bearTrend = emaFast < emaSlow and close < emaTrend
+
+// EMA Cross
+bullCross = ta.crossover(emaFast, emaSlow)
+bearCross = ta.crossunder(emaFast, emaSlow)
+
+// Trend Strength
+emaDistance = math.abs(emaFast - emaSlow)
+
+strongBullTrend =
+    bullTrend and
+    emaDistance > atr * 0.30
+
+strongBearTrend =
+    bearTrend and
+    emaDistance > atr * 0.30
+
+// Market Direction
+marketTrend =
+     strongBullTrend ? "BULLISH" :
+     strongBearTrend ? "BEARISH" :
+     "SIDEWAYS"
+
+// Trend Score
+trendScore =
+     strongBullTrend ? 100 :
+     strongBearTrend ? -100 :
+     0
+
+// Hidden Values
+plot(trendScore, display=display.none)
