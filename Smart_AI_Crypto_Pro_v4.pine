@@ -338,6 +338,7 @@ bearSMC = smcSellScore >= 60
 // Hidden plots
 plot(smcBuyScore, title="SMC Buy Score", display=display.none)
 plot(smcSellScore, title="SMC Sell Score", display=display.none)
+
 //====================================================
 // MODULE 06 - ENTRY ENGINE
 //====================================================
@@ -354,14 +355,14 @@ useSMCFilter = input.bool(true, "Use Smart Money Filter", group="Entry Engine")
 // FILTER RESULTS
 //-------------------------
 
-trendBuyOK = not useTrendFilter or strongBullTrend
-trendSellOK = not useTrendFilter or strongBearTrend
+bool trendBuyOK = not useTrendFilter or strongBullTrend
+bool trendSellOK = not useTrendFilter or strongBearTrend
 
-momentumBuyOK = not useMomentumFilter or bullMomentum
-momentumSellOK = not useMomentumFilter or bearMomentum
+bool momentumBuyOK = not useMomentumFilter or bullMomentum
+bool momentumSellOK = not useMomentumFilter or bearMomentum
 
-smcBuyOK = not useSMCFilter or bullSMC
-smcSellOK = not useSMCFilter or bearSMC
+bool smcBuyOK = not useSMCFilter or bullSMC
+bool smcSellOK = not useSMCFilter or bearSMC
 
 //-------------------------
 // FINAL ENTRY
@@ -374,20 +375,9 @@ bool sellEntry = sellSignal and trendSellOK and momentumSellOK and smcSellOK
 // ENTRY LABELS
 //-------------------------
 
-plotshape(series=buyEntry,
-     title="BUY",
-     style=shape.labelup,
-     location=location.belowbar,
-     color=color.lime,
-     text="BUY",
-     textcolor=color.white,
-     size=size.small)
+plotshape(series=buyEntry, title="BUY", style=shape.labelup, location=location.belowbar, color=color.lime, text="BUY", textcolor=color.white, size=size.small)
 
-plotshape(series=sellEntry,
-     title="SELL",
-     style=shape.labeldown,
-     location=location.abovebar,
-     color=color.orange,
+plotshape(series=sellEntry, title="SELL", style=shape.labeldown, location=location.abovebar, color=color.orange, text="SELL", textcolor=color.white, size=size.small)
      text="SELL",
      textcolor=color.white,
      size=size.small)
