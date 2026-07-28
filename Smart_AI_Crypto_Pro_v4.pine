@@ -460,3 +460,54 @@ tp5 := tradeTP5
 tp6 := tradeTP6
 tp7 := tradeTP7
 tp8 := tradeTP8
+//====================================================
+// MODULE 08 - TAKE PROFIT ENGINE
+//====================================================
+
+//-------------------------
+// TP SETTINGS
+//-------------------------
+
+tpATRMultiplier = input.float(1.0, "TP ATR Multiplier", step=0.1, group="Take Profit")
+
+//-------------------------
+// BUY TAKE PROFITS
+//-------------------------
+
+if buyEntry
+
+    entryPrice := close
+    tradeSide := 1
+    tradeRunning := true
+
+    stopLoss := entryPrice - atr * atrMultiplier
+
+    tp1 := entryPrice + atr * tpATRMultiplier * 1
+    tp2 := entryPrice + atr * tpATRMultiplier * 2
+    tp3 := entryPrice + atr * tpATRMultiplier * 3
+    tp4 := entryPrice + atr * tpATRMultiplier * 4
+    tp5 := entryPrice + atr * tpATRMultiplier * 5
+    tp6 := entryPrice + atr * tpATRMultiplier * 6
+    tp7 := entryPrice + atr * tpATRMultiplier * 7
+    tp8 := entryPrice + atr * tpATRMultiplier * 8
+
+//-------------------------
+// SELL TAKE PROFITS
+//-------------------------
+
+if sellEntry
+
+    entryPrice := close
+    tradeSide := -1
+    tradeRunning := true
+
+    stopLoss := entryPrice + atr * atrMultiplier
+
+    tp1 := entryPrice - atr * tpATRMultiplier * 1
+    tp2 := entryPrice - atr * tpATRMultiplier * 2
+    tp3 := entryPrice - atr * tpATRMultiplier * 3
+    tp4 := entryPrice - atr * tpATRMultiplier * 4
+    tp5 := entryPrice - atr * tpATRMultiplier * 5
+    tp6 := entryPrice - atr * tpATRMultiplier * 6
+    tp7 := entryPrice - atr * tpATRMultiplier * 7
+    tp8 := entryPrice - atr * tpATRMultiplier * 8
