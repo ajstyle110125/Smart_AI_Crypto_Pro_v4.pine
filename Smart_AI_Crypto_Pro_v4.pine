@@ -108,25 +108,24 @@ bearCross = ta.crossunder(emaFast, emaSlow)
 // Trend Strength
 emaDistance = math.abs(emaFast - emaSlow)
 
-strongBullTrend =
-    bullTrend and
-    emaDistance > atr * 0.30
-
-strongBearTrend =
-    bearTrend and
-    emaDistance > atr * 0.30
+strongBullTrend = bullTrend and emaDistance > atr * 0.30
+strongBearTrend = bearTrend and emaDistance > atr * 0.30
 
 // Market Direction
-marketTrend =
-     strongBullTrend ? "BULLISH" :
-     strongBearTrend ? "BEARISH" :
-     "SIDEWAYS"
+string marketTrend = "SIDEWAYS"
+
+if strongBullTrend
+    marketTrend := "BULLISH"
+else if strongBearTrend
+    marketTrend := "BEARISH"
 
 // Trend Score
-trendScore =
-     strongBullTrend ? 100 :
-     strongBearTrend ? -100 :
-     0
+int trendScore = 0
+
+if strongBullTrend
+    trendScore := 100
+else if strongBearTrend
+    trendScore := -100
 
 // Hidden Values
-plot(trendScore, display=display.none)
+plot(trendScore, title="Trend Score", display=display.none)
