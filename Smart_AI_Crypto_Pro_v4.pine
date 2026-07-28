@@ -766,3 +766,29 @@ alertcondition(
     bearCross,
     title = "Bearish EMA Cross",
     message = "Bearish EMA Cross Detected")
+
+//====================================================
+// MODULE 14 - DASHBOARD ENGINE
+//====================================================
+
+var table dashboard = table.new(position.top_right, 2, 6, border_width=1)
+
+if barstate.islast and showDashboard
+
+    table.cell(dashboard, 0, 0, "Smart AI")
+    table.cell(dashboard, 1, 0, "v4 Beta")
+
+    table.cell(dashboard, 0, 1, "Trend")
+    table.cell(dashboard, 1, 1, marketTrend)
+
+    table.cell(dashboard, 0, 2, "AI Score")
+    table.cell(dashboard, 1, 2, str.tostring(aiBuyScore) + " / " + str.tostring(aiSellScore))
+
+    table.cell(dashboard, 0, 3, "Momentum")
+    table.cell(dashboard, 1, 3, bullMomentum ? "Bullish" : bearMomentum ? "Bearish" : "Neutral")
+
+    table.cell(dashboard, 0, 4, "SMC")
+    table.cell(dashboard, 1, 4, bullSMC ? "Bullish" : bearSMC ? "Bearish" : "Neutral")
+
+    table.cell(dashboard, 0, 5, "Signal")
+    table.cell(dashboard, 1, 5, buyEntry ? "BUY" : sellEntry ? "SELL" : "WAIT")
