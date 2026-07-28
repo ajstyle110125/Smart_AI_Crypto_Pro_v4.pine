@@ -857,3 +857,51 @@ sellEntry := sellEntry and (not useSessionFilter or inSession)
 //-------------------------
 
 sessionStatus = inSession ? "OPEN" : "CLOSED"
+
+//====================================================
+// MODULE 17 - UNIFIED SIGNAL ENGINE
+//====================================================
+
+//-------------------------
+// FINAL SIGNALS
+//-------------------------
+
+bool finalBuySignal =
+     buySignal and
+     trendBuyOK and
+     momentumBuyOK and
+     smcBuyOK and
+     htfBullTrend and
+     (not useSessionFilter or inSession)
+
+bool finalSellSignal =
+     sellSignal and
+     trendSellOK and
+     momentumSellOK and
+     smcSellOK and
+     htfBearTrend and
+     (not useSessionFilter or inSession)
+
+//-------------------------
+// CHART LABELS
+//-------------------------
+
+plotshape(
+     finalBuySignal,
+     title="FINAL BUY",
+     style=shape.labelup,
+     location=location.belowbar,
+     color=color.green,
+     text="BUY",
+     textcolor=color.white,
+     size=size.normal)
+
+plotshape(
+     finalSellSignal,
+     title="FINAL SELL",
+     style=shape.labeldown,
+     location=location.abovebar,
+     color=color.red,
+     text="SELL",
+     textcolor=color.white,
+     size=size.normal)
