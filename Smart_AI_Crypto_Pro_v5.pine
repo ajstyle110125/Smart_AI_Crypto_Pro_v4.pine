@@ -1,0 +1,2 @@
+//@version=6
+indicator("Smart AI Crypto Pro v5", overlay=true)
