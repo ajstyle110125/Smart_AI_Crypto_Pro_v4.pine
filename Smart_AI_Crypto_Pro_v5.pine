@@ -1,2 +1,111 @@
 //@version=6
-indicator("Smart AI Crypto Pro v5", overlay=true)
+
+//==================================================
+// SMART AI CRYPTO PRO V5
+// Professional Edition
+// Author : Ajay
+//==================================================
+
+indicator(
+     title = "Smart AI Crypto Pro v5",
+     shorttitle = "SAICP v5",
+     overlay = true,
+     max_labels_count = 500,
+     max_lines_count = 500,
+     max_boxes_count = 500)
+
+//==================================================
+// VERSION
+//==================================================
+
+string VERSION = "v5.0 Build-01"
+
+//==================================================
+// INPUT GROUPS
+//==================================================
+
+string grpSignal = "Signal Engine"
+string grpTrade  = "Trade Engine"
+string grpRisk   = "Risk Management"
+string grpVisual = "Chart Display"
+
+//==================================================
+// USER INPUTS
+//==================================================
+
+showBuySell =
+    input.bool(true,
+    "Show Buy / Sell",
+    group = grpVisual)
+
+showTradeZone =
+    input.bool(true,
+    "Show Long / Short Zone",
+    group = grpVisual)
+
+showTargets =
+    input.bool(true,
+    "Show TP Levels",
+    group = grpVisual)
+
+riskReward =
+    input.float(
+        2.0,
+        "Risk Reward",
+        step = 0.5,
+        minval = 1.0,
+        group = grpRisk)
+
+//==================================================
+// COLORS
+//==================================================
+
+BUY_COLOR = color.lime
+SELL_COLOR = color.red
+
+LONG_COLOR = color.new(color.lime,80)
+SHORT_COLOR = color.new(color.red,80)
+
+TP_COLOR = color.green
+SL_COLOR = color.red
+
+//==================================================
+// TRADE STATE MACHINE
+//==================================================
+
+var int tradeState = 0
+
+// 0 = WAIT
+// 1 = LONG
+// -1 = SHORT
+
+var float entryPrice = na
+var float stopLoss = na
+
+var float tp1 = na
+var float tp2 = na
+var float tp3 = na
+var float tp4 = na
+var float tp5 = na
+var float tp6 = na
+
+//==================================================
+// DRAWING OBJECTS
+//==================================================
+
+var box tradeBox = na
+
+var line slLine = na
+
+var line tp1Line = na
+var line tp2Line = na
+var line tp3Line = na
+var line tp4Line = na
+var line tp5Line = na
+var line tp6Line = na
+
+//==================================================
+// PLACEHOLDER
+//==================================================
+
+plot(close, display=display.none)
